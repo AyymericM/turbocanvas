@@ -16,35 +16,48 @@ export default class CanvasScene extends CanvasBase {
 
         this.drawHairDryer()
         this.drawSoapMachine()
-        // this.drawBubbles()
+        this.drawBubbles()
+    }
+    
+    drawBg() {
+        this.context.save()
+        this.context.fillStyle = '#e84393'
+        this.context.fillRect(0, 0, this.state.screen.width, this.state.screen.height)
+        this.context.restore()
     }
 
     drawHairDryer() {
         const h = new HairDryer(this.context, this.state.screen)
-        h.draw()
         if (this.state.keyPress) {
-            h.shake()
+            h.draw(true)
+        } else {
+            h.draw(false)
         }
     }
 
     drawSoapMachine() {
         const i = new Image()
         i.addEventListener('load', () => {
-            this.context.drawImage(i, 550, (this.state.screen.height / 2) - 300, 400, 400)
+            this.context.drawImage(i, 500, (this.state.screen.height / 2) - 300, 500, 500)
         })
         i.src = 'static/soap_machine.png'
     }
 
     drawBubbles() {
         if (this.state.keyPress) {
-            const bubble = new Bubble(
-                this.state.cursor.x,
-                this.state.cursor.y,
-                this.context,
-                this.state.screen
-            )
-            this.bubbles.push(bubble)
+            if (this.bubbles.length && this.bubbles[this.bubbles.length - 1].isGrowing) {
+                this.bubbles[this.bubbles.length - 1].grow()
+            } else {
+                const bubble = new Bubble(
+                    this.context,
+                    this.state.screen
+                )
+                this.bubbles.push(bubble)
+            }
+        } else {
+            if (this.bubbles.length) this.bubbles[this.bubbles.length - 1].isGrowing = false
         }
+
         for (const bubble of this.bubbles) {
             bubble.draw()
         }
