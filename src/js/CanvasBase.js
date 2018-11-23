@@ -2,6 +2,10 @@ export default class CanvasBase {
     constructor() {
         this.canvas = document.querySelector('.js-canvas')
         this.context = this.canvas.getContext('2d')
+        
+        this.imgCanvas = document.querySelector('.js-img-canvas')
+        this.imgContext = this.imgCanvas.getContext('2d')
+
         this.state = {
             screen: {
                 width: this.canvas.width,
@@ -30,6 +34,9 @@ export default class CanvasBase {
         
         this.canvas.width = this.state.screen.width
         this.canvas.height = this.state.screen.height
+        
+        this.imgCanvas.width = this.state.screen.width
+        this.imgCanvas.height = this.state.screen.height
     }
 
     updateCursor(e) {

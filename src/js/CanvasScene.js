@@ -9,25 +9,24 @@ export default class CanvasScene extends CanvasBase {
         
         this.loop = this.loop.bind(this)
         this.loop()
+        console.log(this.imgContext)
     }
     
     loop() {
         window.requestAnimationFrame(this.loop)
 
+        this.drawBg()
         this.drawHairDryer()
         this.drawSoapMachine()
         this.drawBubbles()
     }
     
     drawBg() {
-        this.context.save()
-        this.context.fillStyle = '#e84393'
-        this.context.fillRect(0, 0, this.state.screen.width, this.state.screen.height)
-        this.context.restore()
+        this.context.clearRect(0, 0, this.state.screen.width, this.state.screen.height)
     }
 
     drawHairDryer() {
-        const h = new HairDryer(this.context, this.state.screen)
+        const h = new HairDryer(this.imgContext, this.state.screen)
         if (this.state.keyPress) {
             h.draw(true)
         } else {
@@ -38,7 +37,7 @@ export default class CanvasScene extends CanvasBase {
     drawSoapMachine() {
         const i = new Image()
         i.addEventListener('load', () => {
-            this.context.drawImage(i, 500, (this.state.screen.height / 2) - 300, 500, 500)
+            this.imgContext.drawImage(i, 500, (this.state.screen.height / 2) - 300, 500, 500)
         })
         i.src = 'static/soap_machine.png'
     }
