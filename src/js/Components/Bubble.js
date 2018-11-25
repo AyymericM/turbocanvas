@@ -34,8 +34,6 @@ export default class Bubble {
         if (!this.isGrowing && this.isVisible) {
             this.conf.x += this.conf.speed.x
             this.conf.y += this.conf.speed.y
-
-            // this.conf.x *= this.conf.speed.offset
             this.conf.y += this.conf.speed.offset
         }
 

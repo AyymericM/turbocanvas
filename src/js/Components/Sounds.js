@@ -21,13 +21,10 @@ export default class Sounds {
     }
     
     ambiant(_bool) {
-        console.log(this.sounds)
-        // this.sounds.hair_dryer.volume = 0.3
         if (_bool) {
             this.sounds.hair_dryer.play()
         } else {
             this.sounds.hair_dryer.pause()
-        }
-        //this.sounds.pump.play()        
+        }   
     }
 }
