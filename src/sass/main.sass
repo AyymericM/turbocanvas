@@ -35,9 +35,11 @@ html, body
     justify-content: center
     align-items: center
     transition: all 1s
+    user-select: none
 
 .intro-content
     color: #ffffff
+    display: none
     font-size: 24px
     margin: 0 100px
     box-sizing: border-box
@@ -45,3 +47,22 @@ html, body
     letter-spacing: 7px
     opacity: 0
     transition: opacity 1.5s
+
+.intro-start
+    color: rgba(255,255,255,1)
+    cursor: pointer
+    padding: 15px 30px
+    background-color: #1c1c1c
+    border: 1px solid #2d2d2d
+    font-size: 18px
+    opacity: 1
+    animation: opacity-changer 1.2s infinite
+    transition: all 0.2s
+
+@keyframes opacity-changer
+    0%
+        opacity: 1
+    50%
+        opacity: 0.6
+    100%
+        opacity: 1

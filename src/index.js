@@ -11,6 +11,7 @@ const sentences = [
 
 let sIndex = 0
 
+const $startBtn = document.querySelector('.intro-start')
 const $canvas = document.querySelector('.js-canvas')
 const $imgCanvas = document.querySelector('.js-img-canvas')
 const $intro = document.querySelector('.intro')
@@ -40,7 +41,10 @@ function circleTexts() {
     }
 }
 
-const interval = setInterval(() => circleTexts(), 4500)
-circleTexts()
-
-// new CanvasScene()
+let interval = null
+$startBtn.addEventListener('click', () => {
+    $startBtn.style.display = 'none'
+    $introContent.style.display = 'block'
+    interval = setInterval(() => circleTexts(), 4500)
+    circleTexts()
+})

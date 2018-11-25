@@ -1,3 +1,5 @@
+import Sounds from "./Sounds";
+
 export default class Bubble {
     constructor(_context, _screen) {
         this.context = _context
@@ -7,6 +9,8 @@ export default class Bubble {
         this.isGrowing = true
         this.screen = _screen
         this.timeBeforeDie = 160
+        this.hasPlayedRelease = false
+        this.hasPlayedPop = false
 
         this.conf = {
             x: 930,
@@ -35,6 +39,12 @@ export default class Bubble {
             this.conf.y += this.conf.speed.offset
         }
 
+        if (!this.isGrowing && !this.hasPlayedRelease) {
+            const sounds = new Sounds()
+            sounds.bubbleRelease()
+            this.hasPlayedRelease = true
+        }
+
         if (
             this.conf.x - this.conf.radius <= this.conf.radius ||
             this.conf.x + this.conf.radius>= this.screen.width ||
@@ -42,6 +52,11 @@ export default class Bubble {
             this.conf.y - this.conf.radius >= this.screen.height
         ) {
             this.isVisible = false
+            if (!this.isVisible && !this.hasPlayedPop) {
+                const sounds = new Sounds()
+                sounds.pop()
+                this.hasPlayedPop = true
+            }
         }
 
         if (this.isVisible) {

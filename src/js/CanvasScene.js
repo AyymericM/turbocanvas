@@ -6,6 +6,7 @@ export default class CanvasScene extends CanvasBase {
     constructor() {
         super()
         this.bubbles = []
+        this.isPlayingAmbiant = false
         
         this.loop = this.loop.bind(this)
         this.loop()

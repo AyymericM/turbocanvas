@@ -1,3 +1,5 @@
+import Sounds from "./Components/Sounds";
+
 export default class CanvasBase {
     constructor() {
         this.canvas = document.querySelector('.js-canvas')
@@ -5,6 +7,8 @@ export default class CanvasBase {
         
         this.imgCanvas = document.querySelector('.js-img-canvas')
         this.imgContext = this.imgCanvas.getContext('2d')
+
+        this.sounds = new Sounds()
 
         this.state = {
             screen: {
@@ -50,6 +54,11 @@ export default class CanvasBase {
     updateKeyPress(e, _bool) {
         if (e.keyCode === 32) {
             this.state.keyPress = _bool
+            if (this.state.keyPress) {
+                this.sounds.ambiant(true)
+            } else {
+                this.sounds.ambiant(false)
+            }
         }
     }
 
