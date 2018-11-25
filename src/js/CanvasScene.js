@@ -9,7 +9,6 @@ export default class CanvasScene extends CanvasBase {
         
         this.loop = this.loop.bind(this)
         this.loop()
-        console.log(this.imgContext)
     }
     
     loop() {

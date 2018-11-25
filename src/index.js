@@ -11,9 +11,10 @@ const sentences = [
 
 let sIndex = 0
 
-// const $canvas = document.querySelector('.js-canvas')
-// const $intro = document.querySelector('.intro')
-// const $introContent = $intro.querySelector('.intro-content')
+const $canvas = document.querySelector('.js-canvas')
+const $imgCanvas = document.querySelector('.js-img-canvas')
+const $intro = document.querySelector('.intro')
+const $introContent = $intro.querySelector('.intro-content')
 
 function circleTexts() {
     if (sIndex < sentences.length) {
@@ -25,9 +26,11 @@ function circleTexts() {
         sIndex += 1
     } else {
         $intro.style.opacity = 0
+        $imgCanvas.style.display = 'block'
         $canvas.style.display = 'block'
         new CanvasScene()
         setTimeout(() => {
+            $imgCanvas.style.opacity = 1
             $canvas.style.opacity = 1
             setTimeout(() => {
                 $intro.style.display = 'none'
@@ -37,7 +40,7 @@ function circleTexts() {
     }
 }
 
-// const interval = setInterval(() => circleTexts(), 4500)
-// circleTexts()
+const interval = setInterval(() => circleTexts(), 4500)
+circleTexts()
 
-new CanvasScene()
+// new CanvasScene()

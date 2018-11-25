@@ -1,5 +1,3 @@
-import Line from "./Line";
-
 export default class Bubble {
     constructor(_context, _screen) {
         this.context = _context
@@ -8,13 +6,11 @@ export default class Bubble {
         this.shouldDelete = false
         this.isGrowing = true
         this.screen = _screen
-        this.timeBeforeDie = 90
-
-        this.lines = []
+        this.timeBeforeDie = 160
 
         this.conf = {
             x: 930,
-            y: 560,
+            y: (this.screen.height / 2) + 110,
             radius: Math.random() * 10 + 30,
             color: `hsl(0, 100%, 100%)`,
             alpha: Math.random() * 0.5 + 0.5,
@@ -31,7 +27,7 @@ export default class Bubble {
     }
 
     draw() {
-        if (!this.isGrowing) {
+        if (!this.isGrowing && this.isVisible) {
             this.conf.x += this.conf.speed.x
             this.conf.y += this.conf.speed.y
 
@@ -40,10 +36,10 @@ export default class Bubble {
         }
 
         if (
-            this.conf.x < - this.conf.radius ||
-            this.conf.x > this.screen.width + this.conf.radius ||
-            this.conf.y < - this.conf.radius ||
-            this.conf.y > this.screen.height + this.conf.radius
+            this.conf.x - this.conf.radius <= this.conf.radius ||
+            this.conf.x + this.conf.radius>= this.screen.width ||
+            this.conf.y + this.conf.radius <= this.conf.radius ||
+            this.conf.y - this.conf.radius >= this.screen.height
         ) {
             this.isVisible = false
         }
@@ -58,14 +54,11 @@ export default class Bubble {
             this.context.closePath()
             this.context.restore()
         } else {
-            for (let i = 0; i < 8 - this.lines.length; i++) {
-                const line = new Line(this.context, this.conf, i)
-                this.lines.push(line)
+            if (this.timeBeforeDie <= 0) {
+                this.shouldDelete = true
+            } else {
+                this.timeBeforeDie -= 1
             }
-            for (const line of this.lines) {
-                line.pop()
-            }
-            this.timeBeforeDie -= 1
         }
     }
 }
