@@ -60,6 +60,6 @@ export default class CanvasScene extends CanvasBase {
         for (const bubble of this.bubbles) {
             bubble.draw()
         }
-        this.bubbles = this.bubbles.filter(__particle => __particle.isVisible)
+        this.bubbles = this.bubbles.filter(__bubble => !__bubble.shouldDelete)
     }
 }
