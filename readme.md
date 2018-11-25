@@ -2,6 +2,8 @@
 
 A simple, homemade, canvas experience.
 
+See it live here: https://dev.aymericm.fr/h/turbocanvas/
+
 ### Usage
 
 - Install [Node.js](https://nodejs.org/en/)
